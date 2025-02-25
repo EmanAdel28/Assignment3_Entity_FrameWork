@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Assignment3_Entity_FrameWork.Entity;
+using Assignment3_Entity_FrameWork.Entity.Inheritance_Mapping;
 using Microsoft.EntityFrameworkCore;
 
 namespace Assignment3_Entity_FrameWork.Contexts
@@ -19,11 +20,33 @@ namespace Assignment3_Entity_FrameWork.Contexts
         {
             modelBuilder.Entity<Student_Course>()
                 .HasKey(SC=>new {SC.StudentId,SC.CourseId});
+
+            modelBuilder.Entity<FullTimeEmployee>()
+                        .HasBaseType<Employee>()
+                        .Property(F => F.Salary)
+                        .HasColumnName("decimal(10,3)");
+
+            modelBuilder.Entity<PartTimeEmployee>()
+                        .HasBaseType<Employee>()
+                        .Property(P => P.HourRate)
+                        .HasColumnName("decimal(5,2)");
         }
 
         public DbSet<Student> Students { get; set; }
         public DbSet<Course> Courses { get; set; }
 
         public DbSet<Student_Course> Students_Course { get; set; }
+
+
+        // Table Per Concrete Class 
+
+        //public DbSet<FullTimeEmployee> FullTimeEmployees { get; set; }
+        //public DbSet<FullTimeEmployee> PartTimeEmployees { get; set; }
+
+        // Table Per Hirarchy
+
+        //public DbSet<FullTimeEmployee> FullTimeEmployees { get; set; }
+        //public DbSet<FullTimeEmployee> PartTimeEmployees { get; set; }
+
     }
 }

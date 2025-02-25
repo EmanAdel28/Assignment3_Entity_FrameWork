@@ -4,6 +4,7 @@ using Assignment3_Entity_FrameWork.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment3_Entity_FrameWork.Migrations
 {
     [DbContext(typeof(EnterPriceDBContext))]
-    partial class EnterPriceDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250225184707_TPCC")]
+    partial class TPCC
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
