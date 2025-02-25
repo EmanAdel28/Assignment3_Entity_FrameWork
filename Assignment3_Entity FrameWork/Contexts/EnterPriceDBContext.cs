@@ -30,6 +30,10 @@ namespace Assignment3_Entity_FrameWork.Contexts
             //            .HasBaseType<Employee>()
             //            .Property(P => P.HourRate)
             //            .HasColumnName("decimal(5,2)");
+
+            modelBuilder.Entity<EmployeeDepartmentView>()
+                        .ToView("EmployeeDepartmentViews")
+                        .HasNoKey();
         }
 
         public DbSet<Student> Students { get; set; }
@@ -39,6 +43,8 @@ namespace Assignment3_Entity_FrameWork.Contexts
 
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Departmennt> Departmennts { get; set; }
+
+        public DbSet<EmployeeDepartmentView> EmployeeDepartmentViews { get; set; }
 
         // Table Per Concrete Class 
 
