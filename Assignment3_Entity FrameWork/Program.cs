@@ -34,6 +34,7 @@ namespace Assignment3_Entity_FrameWork
             //DbContext.SaveChanges(); 
             #endregion
 
+            #region Explicit Loading Vs Egar Loading Vs Lazy Loading
             //var Department = (from D in DbContext.Departmennts
             //                  where D.ID == 10
             //                  select D).FirstOrDefault();
@@ -94,7 +95,32 @@ namespace Assignment3_Entity_FrameWork
 
             //Console.WriteLine($"{Employee.Id} ::{Employee.Name}");
 
-            //Console.WriteLine(Employee.Departmennt.Name);
+            //Console.WriteLine(Employee.Departmennt.Name); 
+            #endregion
+
+            #region Linq Operator [join]
+
+            // By Query Syntax 
+            //var Result = from E in DbContext.Employees
+            //             join D in DbContext.Departmennts
+            //             on E.DeptId equals D.ID
+            //             select new
+            //             {
+            //                 EmpName = E.Name,
+            //                 DeptName = D.Name,
+            //             };
+
+            //// By Flunt Syntax
+            //Result = DbContext.Employees.Join(DbContext.Departmennts,
+            //    E => E.DeptId,
+            //    D => D.ID,
+            //    (E, D) => new
+            //    {
+            //        EmpName = E.Name,
+            //        DeptName = D.Name,
+            //    });
+
+            #endregion
 
         }
     }
