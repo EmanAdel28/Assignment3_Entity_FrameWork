@@ -13,7 +13,7 @@ namespace Assignment3_Entity_FrameWork.Contexts
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server = . ; Database = ITI.; Trusted_Connection = true ;TrustServerCertificate =true");
+            optionsBuilder.UseLazyLoadingProxies().UseSqlServer("Server = . ; Database = ITI.; Trusted_Connection = true ;TrustServerCertificate =true");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -21,15 +21,15 @@ namespace Assignment3_Entity_FrameWork.Contexts
             modelBuilder.Entity<Student_Course>()
                 .HasKey(SC=>new {SC.StudentId,SC.CourseId});
 
-            modelBuilder.Entity<FullTimeEmployee>()
-                        .HasBaseType<Employee>()
-                        .Property(F => F.Salary)
-                        .HasColumnName("decimal(10,3)");
+            //modelBuilder.Entity<FullTimeEmployee>()
+            //            .HasBaseType<Employee>()
+            //            .Property(F => F.Salary)
+            //            .HasColumnName("decimal(10,3)");
 
-            modelBuilder.Entity<PartTimeEmployee>()
-                        .HasBaseType<Employee>()
-                        .Property(P => P.HourRate)
-                        .HasColumnName("decimal(5,2)");
+            //modelBuilder.Entity<PartTimeEmployee>()
+            //            .HasBaseType<Employee>()
+            //            .Property(P => P.HourRate)
+            //            .HasColumnName("decimal(5,2)");
         }
 
         public DbSet<Student> Students { get; set; }
@@ -37,6 +37,8 @@ namespace Assignment3_Entity_FrameWork.Contexts
 
         public DbSet<Student_Course> Students_Course { get; set; }
 
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<Departmennt> Departmennts { get; set; }
 
         // Table Per Concrete Class 
 

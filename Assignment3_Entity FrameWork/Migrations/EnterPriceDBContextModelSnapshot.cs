@@ -39,34 +39,24 @@ namespace Assignment3_Entity_FrameWork.Migrations
                     b.ToTable("Courses");
                 });
 
-            modelBuilder.Entity("Assignment3_Entity_FrameWork.Entity.Inheritance_Mapping.FullTimeEmployee", b =>
+            modelBuilder.Entity("Assignment3_Entity_FrameWork.Entity.Inheritance_Mapping.Departmennt", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("Age")
-                        .HasColumnType("int");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Salary")
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("decimal(10,3)");
+                    b.HasKey("ID");
 
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("FullTimeEmployee");
+                    b.ToTable("Departmennts");
                 });
 
-            modelBuilder.Entity("Assignment3_Entity_FrameWork.Entity.Inheritance_Mapping.PartTimeEmployee", b =>
+            modelBuilder.Entity("Assignment3_Entity_FrameWork.Entity.Inheritance_Mapping.Employee", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -77,12 +67,8 @@ namespace Assignment3_Entity_FrameWork.Migrations
                     b.Property<int?>("Age")
                         .HasColumnType("int");
 
-                    b.Property<int>("CountOfHours")
+                    b.Property<int>("DeptId")
                         .HasColumnType("int");
-
-                    b.Property<decimal>("HourRate")
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("decimal(5,2)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -90,7 +76,9 @@ namespace Assignment3_Entity_FrameWork.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PartTimeEmployee");
+                    b.HasIndex("DeptId");
+
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("Assignment3_Entity_FrameWork.Entity.Student", b =>
@@ -128,6 +116,17 @@ namespace Assignment3_Entity_FrameWork.Migrations
                     b.ToTable("Students_Course");
                 });
 
+            modelBuilder.Entity("Assignment3_Entity_FrameWork.Entity.Inheritance_Mapping.Employee", b =>
+                {
+                    b.HasOne("Assignment3_Entity_FrameWork.Entity.Inheritance_Mapping.Departmennt", "Departmennt")
+                        .WithMany("Employees")
+                        .HasForeignKey("DeptId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Departmennt");
+                });
+
             modelBuilder.Entity("Assignment3_Entity_FrameWork.Entity.Student_Course", b =>
                 {
                     b.HasOne("Assignment3_Entity_FrameWork.Entity.Course", "Course")
@@ -150,6 +149,11 @@ namespace Assignment3_Entity_FrameWork.Migrations
             modelBuilder.Entity("Assignment3_Entity_FrameWork.Entity.Course", b =>
                 {
                     b.Navigation("CourseStudent");
+                });
+
+            modelBuilder.Entity("Assignment3_Entity_FrameWork.Entity.Inheritance_Mapping.Departmennt", b =>
+                {
+                    b.Navigation("Employees");
                 });
 
             modelBuilder.Entity("Assignment3_Entity_FrameWork.Entity.Student", b =>

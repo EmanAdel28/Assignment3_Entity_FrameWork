@@ -12,7 +12,7 @@ namespace Assignment3_Entity_FrameWork.Entity
         public string Name { get; set; }
         public int? Age { get; set; }
 
-        public ICollection<Student_Course> StudentCourse { get; set; } = new HashSet<Student_Course>();
+        public virtual ICollection<Student_Course> StudentCourse { get; set; } = new HashSet<Student_Course>();
 
     }
 }
